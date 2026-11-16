@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>FROSTLINE — Whiteout Relay</title>
+<style>
+  :root{--ice:#9deaff;--blue:#54c5e8;--orange:#ff9b48;--ink:#eaf7fa;--muted:#91a9b5;--panel:#07131de8;--line:#74cde633;--mono:ui-monospace,monospace}
+*{box-sizing:border-box}html,body,#game{margin:0;width:100%;height:100%;overflow:hidden;background:#07131d;color:var(--ink);font-family:system-ui,sans-serif}#game,#game canvas{position:fixed;inset:0;display:block}#hud{position:fixed;inset:0;pointer-events:none}
+  .topline{position:absolute;top:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:34px;min-width:430px;padding:10px 20px;border:1px solid var(--line);background:var(--panel);font:13px var(--mono);letter-spacing:.12em}.team-score{color:var(--ice);white-space:nowrap}.team-score b{color:#fff;font-size:18px;margin-left:5px}#round-timer{font-size:22px;color:#fff}.phase-line{position:absolute;top:72px;left:50%;transform:translateX(-50%);color:var(--muted);font:11px var(--mono);letter-spacing:.16em;white-space:nowrap}
+  #start-overlay[hidden]{display:none!important}
+#crosshair{position:fixed;left:50%;top:50%;width:24px;height:24px;transform:translate(-50%,-50%)}#crosshair i{position:absolute;background:#d8f8ff;box-shadow:0 0 8px #7ce8ff}#crosshair i:nth-child(1){width:2px;height:7px;left:11px;top:0}#crosshair i:nth-child(2){width:2px;height:7px;left:11px;bottom:0}#crosshair i:nth-child(3){width:7px;height:2px;left:0;top:11px}#crosshair i:nth-child(4){width:7px;height:2px;right:0;top:11px}
+#hitmarker{position:absolute;left:50%;top:50%;opacity:0;color:var(--orange)}#health{position:absolute;left:32px;bottom:28px;font:26px var(--mono);color:var(--ice)}#health small,#ammo-reserve{font-size:13px;color:var(--muted)}#ammo{position:absolute;right:32px;bottom:25px;display:flex;gap:8px;align-items:baseline;font:42px var(--mono)}#ammo-reserve{font-size:15px}#score{position:absolute;top:26px;right:30px;font:14px var(--mono);color:var(--ice)}#killfeed{position:absolute;right:28px;top:78px;font:12px var(--mono);color:var(--orange)}
+#minimap{position:absolute;right:25px;bottom:95px;width:150px;height:150px;border:1px solid #83dff477;background:#091923bb;transform:rotate(0deg)}#buy-menu{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:420px;padding:24px;background:var(--panel);border:1px solid var(--line);display:none}#buy-menu h2{color:var(--ice);letter-spacing:.15em}#start-overlay,.banner{position:absolute;inset:0;display:grid;place-items:center;background:#04101acc;pointer-events:auto}.card{width:min(480px,90vw);padding:34px;border:1px solid #76d8ed55;background:linear-gradient(145deg,#102431ee,#07121bee);box-shadow:0 20px 80px #0008}.card h1{margin:0;color:var(--ice);font-size:38px;letter-spacing:.16em}.card p{color:var(--muted);line-height:1.6}.card button{padding:12px 22px;border:1px solid var(--orange);background:var(--orange);color:#10202a;font-weight:800;cursor:pointer;letter-spacing:.12em}.keys{color:var(--muted);font:12px var(--mono);line-height:2}.banner{inset:12% 0 auto;background:#06131bd9;padding:14px;height:auto;color:var(--orange);font:20px var(--mono);letter-spacing:.2em;display:none}
+#score.phase-line{position:absolute;top:72px;left:50%;right:auto;bottom:auto;transform:translateX(-50%);color:var(--muted);font:11px var(--mono);letter-spacing:.16em;white-space:nowrap}
+</style>
+</head><body><div id="game"></div><div id="hud">
+<div class="topline"><span class="team-score">AURORA <b id="aurora-score">0</b></span><span id="round-timer">01:45</span><span class="team-score">GLACIER <b id="glacier-score">0</b></span></div><div class="phase-line" id="score">ROUND 01 · BUY PHASE</div>
+<div id="crosshair"><i></i><i></i><i></i><i></i></div><div id="hitmarker">✕</div><div id="health">100 <small>VITALS</small></div><div id="ammo"><span id="ammo-mag">30</span><span id="ammo-reserve">/ 90</span></div><div id="killfeed"></div><canvas id="minimap" width="150" height="150"></canvas>
+<section id="buy-menu"><h2>FIELD SUPPLY</h2><p>Purchase equipment before deployment.</p></section></div>
+<div id="start-overlay"><section class="card"><h1>FROSTLINE</h1><p>WHITEOUT RELAY · MIDNIGHT OPERATIONS<br>Two sites. Three lanes. One uplink.</p><button id="play">DEPLOY</button><div class="keys">WASD MOVE · MOUSE LOOK · CTRL CROUCH · SPACE JUMP</div></section></div><div class="banner" id="round-banner">ROUND 01 · DEPLOY</div>
+<div id="money-readout"></div>
+<div id="objective-prompt"></div>
+<div id="health-vignette"></div>
+<div id="damage-direction"></div>
+<div id="damage-number"></div>
+<div id="buy-funds">AVAILABLE CREDITS: $0</div>
+<div id="buy-items"></div>
+<script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js"}}</script>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
